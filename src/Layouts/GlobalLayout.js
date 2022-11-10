@@ -4,10 +4,10 @@ import { Outlet } from "react-router-dom";
 const GlobalLayout = (props) => {
       
     return (
-        <div className="todo-layout">
+        <div className="todolist-layout">
             <h1>Global Layout</h1>
-            <NavBar todoList={props.todoList}/>
-            <div className="todo-content">
+            <NavBar toDoList={props.toDoList}/>
+            <div className="todolist-content">
              <Outlet />
             </div>
         </div>

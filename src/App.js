@@ -26,13 +26,13 @@ function App() {
   ]);
 
   useEffect(()=>{
-    const fetchMockTodos = async () => {
+    const fetchMockToDos = async () => {
       const result = await fetch(`${urlEndpoint}/mocktodos/all`);
-      const fetchedMockTodos = await result.json();
+      const fetchedMockToDos = await result.json();
 
-      setToDoList(fetchedMockTodos.todo)
+      setToDoList(fetchedMockToDos.todo)
     }
-    fetchMockTodos()
+    fetchMockToDos()
   }, [])
 
   return (
