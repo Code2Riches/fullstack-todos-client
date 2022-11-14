@@ -1,11 +1,11 @@
-import { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom"
 
 const NavBar = () => {
     return (
-        <div className="nav-bar">
-            {/* <Link to="/"> Home </Link>
-            <Link to="/mocktodos">Mock ToDos List</Link>
-            <Link to="/mocktodos/form">Mock ToDo Form</Link> */}
+        <div>
+           <Link to="/">Home</Link>
+           <Link to="/todo-form">ToDo Form</Link>
         </div>
     )
 };

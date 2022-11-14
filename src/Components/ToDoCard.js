@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react"
+import React from "react";
 
-const ToDoCard = ({ toDo, urlEndpoint }) => {
+const ToDoCard = ({ toDo, urlEndpoint, refetch }) => {
     const id = toDo.id 
 
     const handleSetToDoComplete = async () => {
-
+        refetch(true)
         const request = await fetch(`${urlEndpoint}/todos/update-one/${id}`, {
             method: "PUT",
             headers: {
@@ -14,6 +14,16 @@ const ToDoCard = ({ toDo, urlEndpoint }) => {
                 isComplete: toDo.isComplete ? false : true
             }),
         });
+        // update needs to be set back to false otherwise it wont listen for anymore changes after the initial one
+        refetch(false)
+    }
+
+    const handleDeleteToDo = async () => {
+        refetch(true)
+        const request = await fetch(`${urlEndpoint}/todos/delete-one/${id}`, {
+            method: "DELETE",
+        })
+        refetch(false)
     }
 
     return (
@@ -23,7 +33,9 @@ const ToDoCard = ({ toDo, urlEndpoint }) => {
             <p>Description: {toDo.description}</p>
             <p>Priority: {toDo.priority}</p>
             <p>Is Complete: {toDo.isComplete ? ' Complete': 'Incomplete'}</p>
-                <button onClick={(e) => {handleSetToDoComplete() }}>Toggle</button>
+                <button onClick={(e) => {handleSetToDoComplete() }}>Toggle Complete</button>
+                <br/>
+                <button onClick={(e) => {handleDeleteToDo() }}>Delete</button>
             <p>Creation Date: {toDo.creationDate.toString()}</p>
             <p>Last Modified: {toDo.lastModified.toString()}</p>
             <p>Completion Date: {toDo.completedDate !== null && toDo.completedDate}</p>

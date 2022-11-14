@@ -21,7 +21,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: whitesmoke;
 }
 
 .App-link {
@@ -38,8 +38,22 @@
 }
 
 .todo-card {
-  border: 1px solid white;
-    margin: 20px 40px 20px 40px;
-    padding: 10px;
-    border-radius: 20px;
+  border: 1px solid yellowgreen;
+  margin: 20px 40px 20px 40px;
+  padding: 10px;
+  border-radius: 20px;
 }
+
+.todolist-layout {
+  border: 10px solid orange;
+}
+
+.todolist-content {
+  border: 10px solid darkblue;
+}
+
+.to-do-list {
+  border: 10px solid red;
+}
+
+a{color: yellowgreen; margin: 0 10px;}

@@ -1,46 +1,53 @@
 import {useState, useEffect} from "react";
 import GlobalLayout from "./Layouts/GlobalLayout";
-import NavBar from "./Components/NavBar";
-import ToDoCard from "./Components/ToDoCard";
+// import NavBar from "./Components/NavBar";
+// import ToDoCard from "./Components/ToDoCard";
 import HomePage from "./Pages/HomePage";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-
+import ToDoFormPage from "./Pages/ToDoFormPage";
 import './App.css';
 
-const urlEndpoint = "http://localhost:4000"
+const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT
 
 function App() {
-  
   const [toDoList, setToDoList] = useState([]);
+  const [refetch, setRefetch] = useState(false);
+
+  useEffect(()=>{
+    const fetchToDos = async () => {
+      const result = await fetch(`${urlEndpoint}/todos/all`);
+      const fetchedToDos = await result.json();
+
+      setToDoList(fetchedToDos.todo)
+    }
+    fetchToDos()
+  }, [refetch])
+
   const router = createBrowserRouter([
     {
     path: "/",
     element: <GlobalLayout />,
       children: [
         {
-          element: <HomePage toDoList={toDoList}/>,
+          element: <HomePage toDoList={toDoList} urlEndpoint={urlEndpoint} refetch={setRefetch} />,
           index: true
         },
+        {
+          path: "/todo-form",
+          element: <ToDoFormPage urlEndpoint={urlEndpoint} refetch={setRefetch} />
+          
+        }
+        // element: <ToDoFormPage urlEndpoint={urlEndpoint} ToDoFormItem={ToDoFormItem} />
       ],
     },
   ]);
 
-  useEffect(()=>{
-    const fetchMockToDos = async () => {
-      const result = await fetch(`${urlEndpoint}/mocktodos/all`);
-      const fetchedMockToDos = await result.json();
-
-      setToDoList(fetchedMockToDos.todo)
-    }
-    fetchMockToDos()
-  }, [])
-
   return (
-    <div className="App">
-      <header className="App-header">
-       <RouterProvider router={router} />
-      </header>
-    </div>
+    <header className="App-header">
+      <div className="App">
+        <RouterProvider router={router} />
+      </div> 
+    </header>
   );
 }
 
