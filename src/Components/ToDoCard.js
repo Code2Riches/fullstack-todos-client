@@ -36,8 +36,8 @@ const ToDoCard = ({ toDo, urlEndpoint, refetch }) => {
                 <button onClick={(e) => {handleSetToDoComplete() }}>Toggle Complete</button>
                 <br/>
                 <button onClick={(e) => {handleDeleteToDo() }}>Delete</button>
-            <p>Creation Date: {toDo.creationDate.toString()}</p>
-            <p>Last Modified: {toDo.lastModified.toString()}</p>
+            <p>Creation Date: {toDo.creationDate}</p>
+            <p>Last Modified: {toDo.lastModified}</p>
             <p>Completion Date: {toDo.completedDate !== null && toDo.completedDate}</p>
         </div>
     )
